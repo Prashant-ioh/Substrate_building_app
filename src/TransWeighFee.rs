@@ -99,3 +99,17 @@ impl<T: Get<Perquintill>> WeightToFee<Fixed128, Fixed128> for TargetedFeeAdjustm
         multiplier
     }
 }
+
+
+// Loosely coupled pallets
+
+pub trait Currency<AccountId> {
+    // -- snip --
+    fn transfer(
+        source: &AccountId,
+        dest: &AccountId,
+        value: Self::Balance,
+        // don't worry about the last parameter for now
+        existence_requirement: ExistenceRequirement,
+    ) -> DispatchResult;
+}
