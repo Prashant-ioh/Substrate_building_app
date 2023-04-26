@@ -113,3 +113,14 @@ pub trait Currency<AccountId> {
         existence_requirement: ExistenceRequirement,
     ) -> DispatchResult;
 }
+
+pub trait Config: frame_system::Config {
+    type MyCurrency: Currency<Self::AccountId>;
+}
+
+impl<T: Config> Pallet<T> {
+    pub fn my_function() {
+        T::MyCurrency::transfer(&buyer, &seller, price, ExistenceRequirement::KeepAlive)?;
+    }
+}
+
