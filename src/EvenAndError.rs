@@ -41,3 +41,41 @@ pub enum Event<T: Config> {
       //--add-this------------------------------------->
         }
 );
+
+
+
+// Depositing an event
+
+// 1. Use the `generate_deposit` attribute when declaring the Events enum.
+#[pallet::event]
+	#[pallet::generate_deposit(pub(super) fn deposit_event)] // <------ here ----
+	#[pallet::metadata(...)]
+	pub enum Event<T: Config> {
+		// --snip--
+	}
+
+// 2. Use `deposit_event` inside the dispatchable function
+#[pallet::call]
+	impl<T: Config> Pallet<T> {
+		#[pallet::weight(1_000)]
+		pub(super) fn set_value(
+			origin: OriginFor<T>,
+			value: u64,
+		) -> DispatchResultWithPostInfo {
+			let sender = ensure_signed(origin)?;
+			// --snip--
+			Self::deposit_event(RawEvent::ValueSet(value, sender));
+		}
+	}
+
+    //Errors
+    //Each FRAME pallet can define a custom DispatchError by using the #[pallet::error] macro
+    #[pallet::error]
+    pub enum Error<T> {
+		/// Error names should be descriptive.
+		InvalidParameter,
+		/// Errors should have helpful documentation associated with them.
+		OutOfSpace,
+	}
+
+    frame_support::ensure!(param < T::MaxVal::get(), Error::<T>::InvalidParameter);
