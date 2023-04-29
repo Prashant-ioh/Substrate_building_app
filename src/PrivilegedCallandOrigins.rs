@@ -18,3 +18,9 @@ proposal.dispatch(system::RawOrigin::Signed(who).into())
 
 // None
 proposal.dispatch(system::RawOrigin::None.into())
+
+
+//Custom origins
+
+//These can be used as authorization checks inside functions from specific modules in your runtime, 
+// or to define custom access-control logic around the sources of runtime requests
