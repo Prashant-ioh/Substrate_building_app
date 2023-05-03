@@ -131,9 +131,10 @@ fn fake_test_example() {
       ExamplePallet::on_finalize(System::block_number());
       System::on_finalize(System::block_number());
      }
-   //  System::reset_events();
+     System::reset_events();
      System::set_block_number(System::block_number() + 1);
      System::on_initialize(System::block_number());
+     System::on_initialize(System::block_number_12());
      ExamplePallet::on_initialize(System::block_number());
     }
    }
