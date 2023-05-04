@@ -70,6 +70,7 @@ impl WeightToFee<Weight, Balance> for CustomWeightToFee {
         let a = Balance::from(100);
         let b = Balance::from(2);
         let w = Balance::from(w);
+        let v = Balance::from(w);
         a + b * w
     }
 }
