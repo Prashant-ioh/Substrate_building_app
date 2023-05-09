@@ -128,4 +128,5 @@ impl<T: Config> Pallet<T> {
 
 #[pallet::weight(T::DbWeight::get().read_writes(1,2)+ 10_000)]
 #[pallet::weight(T::DbWeight(10_000))]
+#[pallet::weight(T::DbWeight(10_000))]
 //
